@@ -32,18 +32,12 @@ public class FilaDinamica <T>
     }
 
     public void imprime() {
-
-        System.out.print("[");
         Nodo cursor = this.inicio;
         for (int i = 0; i < this.nElementos; i++) {
             System.out.print(cursor.elemento + " ");
             cursor = cursor.proximo;
         }
-        if (this.nElementos == 0)
-            System.out.println("] Inicio: " + this.inicio + ", Fim: " + this.fim);
-        else
-            System.out.println("] Inicio: " + this.inicio.elemento + ", Fim: " + this.fim.elemento);
-
+        System.out.println();
     }
 
     public T desenfileira() {

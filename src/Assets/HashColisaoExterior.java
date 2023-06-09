@@ -31,9 +31,9 @@ public class HashColisaoExterior {
     }
 
     private int funcaoHashDiv(String elemento) {
-        elemento.toLowerCase();
+        String palavra = elemento.toLowerCase();
 
-        char primeiroCaractere = elemento.charAt(0);
+        char primeiroCaractere = palavra.charAt(0);
 
         int valorDaASCII = (int) primeiroCaractere;
 
@@ -58,5 +58,10 @@ public class HashColisaoExterior {
     public boolean busca(String elemento) {
         int endereco = funcaoHashDiv(elemento);
         return this.vetor[endereco].busca(elemento);
+    }
+
+    public void colocarLinha(String elemento, int linha) {
+        int endereco = funcaoHashDiv(elemento);
+        this.vetor[endereco].inserePosicaoLinhaHash(elemento, linha);
     }
 }

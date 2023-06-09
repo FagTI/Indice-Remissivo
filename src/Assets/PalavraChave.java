@@ -1,3 +1,5 @@
+package Assets;
+
 import Assets.FilaDinamica;
 
 public class PalavraChave {

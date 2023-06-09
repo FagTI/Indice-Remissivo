@@ -1,15 +1,15 @@
 package Assets;
 
+
 public class ArvoreBinariaBusca
 {
     class Nodo {
-
-        public String elemento;
+        public PalavraChave palavraChave = new PalavraChave();
         public Nodo esquerdo;
         public Nodo direito;
 
         public Nodo(String elemento) {
-            this.elemento = elemento;
+            this.palavraChave.chave = elemento;
             this.esquerdo = null;
             this.direito = null;
         }
@@ -40,7 +40,7 @@ public class ArvoreBinariaBusca
 
             Nodo cursor = fila.desenfileira();
 
-            System.out.print(cursor.elemento + " ");
+            System.out.print(cursor.palavraChave + " ");
 
             if (cursor.esquerdo != null) {
                 fila.enfileira(cursor.esquerdo);
@@ -67,7 +67,7 @@ public class ArvoreBinariaBusca
 
     public void imprimeEmOrdem() {
         this.emOrdem(this.raiz);
-        System.out.println();
+        //ystem.out.println();
     }
 
     public void preOrdem(Nodo nodo) {
@@ -75,7 +75,7 @@ public class ArvoreBinariaBusca
         if (nodo == null)
             return;
 
-        System.out.print(nodo.elemento + " ");
+        System.out.print(nodo.palavraChave + " ");
         this.preOrdem(nodo.esquerdo);
         this.preOrdem(nodo.direito);
     }
@@ -87,7 +87,7 @@ public class ArvoreBinariaBusca
 
         this.posOrdem(nodo.esquerdo);
         this.posOrdem(nodo.direito);
-        System.out.print(nodo.elemento + " ");
+        System.out.print(nodo.palavraChave + " ");
     }
 
     public void emOrdem(Nodo nodo) {
@@ -96,12 +96,16 @@ public class ArvoreBinariaBusca
             return;
 
         this.emOrdem(nodo.esquerdo);
-        System.out.print(nodo.elemento + " ");
+        System.out.print(nodo.palavraChave.chave + " ");
+        nodo.palavraChave.ocorrencias.imprime();
         this.emOrdem(nodo.direito);
     }
 
+    public void tratamento(String elemento) {
+
+    }
+
     public void insere(String elemento) {
-        elemento.toLowerCase();
         this.insere(elemento, this.raiz);
     }
 
@@ -115,7 +119,7 @@ public class ArvoreBinariaBusca
             return;
         }
 
-        if (verificarValorDaString(elemento) < verificarValorDaString(nodo.elemento)) {
+        if (elemento.compareTo(nodo.palavraChave.chave) < 0) {
             if (nodo.esquerdo == null) {
                 nodo.esquerdo = novo;
                 this.nElementos++;
@@ -125,7 +129,7 @@ public class ArvoreBinariaBusca
             }
         }
 
-        if (verificarValorDaString(elemento) > verificarValorDaString(nodo.elemento)) {
+        if (elemento.compareTo(nodo.palavraChave.chave) > 0) {
             if (nodo.direito == null) {
                 nodo.direito = novo;
                 this.nElementos++;
@@ -161,9 +165,9 @@ public class ArvoreBinariaBusca
             return null;
         }
 
-        if (verificarValorDaString(elemento) < verificarValorDaString(nodo.elemento)) {
+        if (elemento.compareTo(nodo.palavraChave.chave) < 0) {
             nodo.esquerdo = this.remove(elemento, nodo.esquerdo);
-        } else if (verificarValorDaString(elemento) > verificarValorDaString(nodo.elemento)) {
+        } else if (elemento.compareTo(nodo.palavraChave.chave) > 0) {
             nodo.direito = this.remove(elemento, nodo.direito);
         } else {
 
@@ -179,8 +183,8 @@ public class ArvoreBinariaBusca
                 return nodo.esquerdo;
             } else {
                 Nodo substituto = this.menorElemento(nodo.direito);
-                nodo.elemento = substituto.elemento;
-                this.remove(substituto.elemento, nodo.direito);
+                nodo.palavraChave = substituto.palavraChave;
+                this.remove(substituto.palavraChave.chave, nodo.direito);
             }
         }
 
@@ -189,7 +193,6 @@ public class ArvoreBinariaBusca
 
     public boolean busca(String elemento) {
         return this.busca(elemento, this.raiz);
-
     }
 
     public boolean busca(String elemento, Nodo nodo) {
@@ -198,12 +201,31 @@ public class ArvoreBinariaBusca
             return false;
         }
 
-        if (verificarValorDaString(elemento) < verificarValorDaString(nodo.elemento)) {
+        if (elemento.compareTo(nodo.palavraChave.chave) < 0) {
             return this.busca(elemento, nodo.esquerdo);
-        } else if (verificarValorDaString(elemento) > verificarValorDaString(nodo.elemento)) {
+        } else if (elemento.compareTo(nodo.palavraChave.chave) > 0) {
             return this.busca(elemento, nodo.direito);
         } else {
             return true;
+        }
+    }
+
+    public void inserePosicaoLinhaHash(String elemento, int linha) {
+        inserePosicaoLinha(elemento, this.raiz, linha);
+    }
+
+    public void inserePosicaoLinha(String elemento, Nodo nodo, int linha) {
+
+        if (nodo == null) {
+            return;
+        }
+
+        if (elemento.compareTo(nodo.palavraChave.chave) < 0) {
+            this.inserePosicaoLinha(elemento, nodo.esquerdo, linha);
+        } else if (elemento.compareTo(nodo.palavraChave.chave) > 0) {
+            this.inserePosicaoLinha(elemento, nodo.direito, linha);
+        } else {
+            nodo.palavraChave.ocorrencias.enfileira(linha);
         }
     }
 
