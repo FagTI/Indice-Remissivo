@@ -67,7 +67,7 @@ public class ArvoreBinariaBusca
 
     public void imprimeEmOrdem() {
         this.emOrdem(this.raiz);
-        //ystem.out.println();
+        //System.out.println();
     }
 
     public void preOrdem(Nodo nodo) {

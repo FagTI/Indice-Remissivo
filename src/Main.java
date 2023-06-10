@@ -1,9 +1,7 @@
 import Assets.HashColisaoExterior;
 import Assets.PalavraChave;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.util.Scanner;
 
 public class Main {
@@ -11,11 +9,21 @@ public class Main {
         leituraDosArquivos();
     }
     public static void leituraDosArquivos() {
+        HashColisaoExterior Hash = new HashColisaoExterior(26);
+
+        String fileName = "meuIndice.txt";
 
         int contador = 0;
-
-        HashColisaoExterior Hash = new HashColisaoExterior(26);
         try {
+            // Criar um FileOutputStream com o nome do arquivo
+            FileOutputStream fileOutputStream = new FileOutputStream(fileName);
+
+            // Criar um PrintStream para redirecionar a saída para o arquivo
+            PrintStream printStream = new PrintStream(fileOutputStream);
+
+            // Redirecionar a saída para o PrintStream
+            System.setOut(printStream);
+
             // Abrindo oarquivo das chave
             File chaves = new File("C:\\Users\\yango\\OneDrive\\Área de Trabalho\\Unifor\\3° semestre\\Estrutura de Dados\\Índice Remissivo Exemplos\\chaves.txt");
             Scanner scannerDasChaves = new Scanner(chaves);
@@ -49,11 +57,17 @@ public class Main {
                 }
                 //System.out.println("Texto: " + linha);
             }
+
             Hash.imprimeIndice();
+
             scannerDoTexto.close();
+            printStream.close();
+            fileOutputStream.close();
 
         } catch (FileNotFoundException e) {
             System.out.println("Arquivo não encontrado: " + e.getMessage());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 }
