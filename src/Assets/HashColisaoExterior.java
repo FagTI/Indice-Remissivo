@@ -31,13 +31,30 @@ public class HashColisaoExterior {
     }
 
     private int funcaoHashDiv(String elemento) {
-        String palavra = elemento.toLowerCase();
+        String str = tratamentoHash(elemento);
 
-        char primeiroCaractere = palavra.charAt(0);
+        char primeiroCaractere = str.charAt(0);
 
         int valorDaASCII = (int) primeiroCaractere;
 
         return valorDaASCII - 97;
+    }
+
+    public String tratamentoHash(String elemento) {
+        String str = elemento.toLowerCase();
+
+        str = str.replaceAll("[^a-zA-Z0-9À-ÿ]", " ");
+        str = str.replaceAll("à|á|â|ã|ä|å", "a");
+        str = str.replaceAll("è|é|ê|ë", "e");
+        str = str.replaceAll("ì|í|î|ï", "i");
+        str = str.replaceAll("ð|ò|ó|ô|õ|ö|ø", "o");
+        str = str.replaceAll("ù|ú|û|ü", "u");
+        str = str.replaceAll("ý|ÿ", "y");
+        str = str.replaceAll("þ", "p");
+        str = str.replaceAll("ñ", "n");
+        str = str.replaceAll("ç", "c");
+
+        return str;
     }
 
     public void insere(String elemento) {

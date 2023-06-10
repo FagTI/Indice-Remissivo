@@ -39,7 +39,8 @@ public class Main {
                 Scanner scannerDaLinha = new Scanner(linha);
                 while (scannerDaLinha.hasNext()) {
                     String palavrasDaLinha = scannerDaLinha.next();
-                    palavrasDaLinha = palavrasDaLinha.replace(",","");
+
+                    palavrasDaLinha = palavrasDaLinha.replaceAll("[^a-zA-Z0-9À-ÿ]","");
 
                     if(Hash.busca(palavrasDaLinha)){
                         Hash.colocarLinha(palavrasDaLinha, contador);
