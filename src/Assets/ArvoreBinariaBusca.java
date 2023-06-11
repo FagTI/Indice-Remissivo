@@ -1,6 +1,5 @@
 package Assets;
 
-
 public class ArvoreBinariaBusca
 {
     class Nodo {
@@ -269,7 +268,7 @@ public class ArvoreBinariaBusca
         for (int i = 0; i < elemento.length(); i++) {
             char caractere = elemento.charAt(i);
             int valorASCII = (int) caractere;
-            somatorio += caractere;
+            somatorio += valorASCII;
         }
 
         return somatorio;

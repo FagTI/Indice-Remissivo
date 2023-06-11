@@ -5,7 +5,7 @@ import java.io.*;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         leituraDosArquivos();
     }
     public static void leituraDosArquivos() {
@@ -13,7 +13,7 @@ public class Main {
 
         String fileName = "meuIndice.txt";
 
-        int contador = 0;
+        int contadorDaLinha = 0;
         try {
             // Criar um FileOutputStream com o nome do arquivo
             FileOutputStream fileOutputStream = new FileOutputStream(fileName);
@@ -42,17 +42,26 @@ public class Main {
             // Lendo o arquivo do texto linha por linha
             while (scannerDoTexto.hasNextLine()) {
                 String linha = scannerDoTexto.nextLine();
-                contador++;
+                contadorDaLinha++;
 
                 Scanner scannerDaLinha = new Scanner(linha);
                 while (scannerDaLinha.hasNext()) {
                     String palavrasDaLinha = scannerDaLinha.next();
 
-                    palavrasDaLinha = palavrasDaLinha.replaceAll("[^-a-zA-Z0-9À-ÿ]","");
                     palavrasDaLinha = palavrasDaLinha.toLowerCase();
+                    palavrasDaLinha = palavrasDaLinha.replaceAll("[^-a-zA-Z0-9À-ÿ]","");
+                    palavrasDaLinha = palavrasDaLinha.replaceAll("à|á|â|ã|ä|å", "a");
+                    palavrasDaLinha = palavrasDaLinha.replaceAll("è|é|ê|ë", "e");
+                    palavrasDaLinha = palavrasDaLinha.replaceAll("ì|í|î|ï", "i");
+                    palavrasDaLinha = palavrasDaLinha.replaceAll("ð|ò|ó|ô|õ|ö|ø", "o");
+                    palavrasDaLinha = palavrasDaLinha.replaceAll("ù|ú|û|ü", "u");
+                    palavrasDaLinha = palavrasDaLinha.replaceAll("ý|ÿ", "y");
+                    palavrasDaLinha = palavrasDaLinha.replaceAll("þ", "p");
+                    palavrasDaLinha = palavrasDaLinha.replaceAll("ñ", "n");
+
 
                     if(Hash.busca(palavrasDaLinha)){
-                        Hash.colocarLinha(palavrasDaLinha, contador);
+                        Hash.colocarLinha(palavrasDaLinha, contadorDaLinha);
                     }
 
                 }
