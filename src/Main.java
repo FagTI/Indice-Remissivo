@@ -48,7 +48,8 @@ public class Main {
                 while (scannerDaLinha.hasNext()) {
                     String palavrasDaLinha = scannerDaLinha.next();
 
-                    palavrasDaLinha = palavrasDaLinha.replaceAll("[^a-zA-Z0-9À-ÿ]","");
+                    palavrasDaLinha = palavrasDaLinha.replaceAll("[^-a-zA-Z0-9À-ÿ]","");
+                    palavrasDaLinha = palavrasDaLinha.toLowerCase();
 
                     if(Hash.busca(palavrasDaLinha)){
                         Hash.colocarLinha(palavrasDaLinha, contador);

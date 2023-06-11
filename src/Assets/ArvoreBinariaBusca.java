@@ -101,10 +101,10 @@ public class ArvoreBinariaBusca
         this.emOrdem(nodo.direito);
     }
 
-    public void tratamentoArvore(String elemento) {
+    public String tratamentoArvore(String elemento) {
         String str = elemento.toLowerCase();
 
-        str = str.replaceAll("[^a-zA-Z0-9À-ÿ]", " ");
+        str = str.replaceAll("[^-a-zA-Z0-9À-ÿ]", " ");
         str = str.replaceAll("à|á|â|ã|ä|å", "a");
         str = str.replaceAll("è|é|ê|ë", "e");
         str = str.replaceAll("ì|í|î|ï", "i");
@@ -113,6 +113,8 @@ public class ArvoreBinariaBusca
         str = str.replaceAll("ý|ÿ", "y");
         str = str.replaceAll("þ", "p");
         str = str.replaceAll("ñ", "n");
+
+        return str;
     }
 
     public void insere(String elemento) {
@@ -121,9 +123,9 @@ public class ArvoreBinariaBusca
 
     public void insere(String elemento, Nodo nodo) {
 
-        tratamentoArvore(elemento);
+        String str = tratamentoArvore(elemento);
 
-        Nodo novo = new Nodo(elemento);
+        Nodo novo = new Nodo(str);
 
         if (nodo == null) {
             this.raiz = novo;
@@ -131,23 +133,23 @@ public class ArvoreBinariaBusca
             return;
         }
 
-        if (elemento.compareTo(nodo.palavraChave.chave) < 0) {
+        if (str.compareTo(nodo.palavraChave.chave) < 0) {
             if (nodo.esquerdo == null) {
                 nodo.esquerdo = novo;
                 this.nElementos++;
                 return;
             } else {
-                this.insere(elemento, nodo.esquerdo);
+                this.insere(str, nodo.esquerdo);
             }
         }
 
-        if (elemento.compareTo(nodo.palavraChave.chave) > 0) {
+        if (str.compareTo(nodo.palavraChave.chave) > 0) {
             if (nodo.direito == null) {
                 nodo.direito = novo;
                 this.nElementos++;
                 return;
             } else {
-                this.insere(elemento, nodo.direito);
+                this.insere(str, nodo.direito);
             }
         }
     }

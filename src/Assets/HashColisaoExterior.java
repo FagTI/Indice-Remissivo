@@ -43,7 +43,7 @@ public class HashColisaoExterior {
     public String tratamentoHash(String elemento) {
         String str = elemento.toLowerCase();
 
-        str = str.replaceAll("[^a-zA-Z0-9À-ÿ]", " ");
+        str = str.replaceAll("[^-a-zA-Z0-9À-ÿ]", " ");
         str = str.replaceAll("à|á|â|ã|ä|å", "a");
         str = str.replaceAll("è|é|ê|ë", "e");
         str = str.replaceAll("ì|í|î|ï", "i");
