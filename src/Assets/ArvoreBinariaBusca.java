@@ -151,6 +151,7 @@ public class ArvoreBinariaBusca
                 this.insere(str, nodo.direito);
             }
         }
+
     }
 
     private Nodo maiorElemento(Nodo nodo) {
@@ -238,7 +239,9 @@ public class ArvoreBinariaBusca
         } else if (elemento.compareTo(nodo.palavraChave.chave) > 0) {
             this.inserePosicaoLinha(elemento, nodo.direito, linha);
         } else {
-            nodo.palavraChave.ocorrencias.enfileira(linha);
+            if(nodo.palavraChave.ocorrencias.contem(linha) == false) {
+                nodo.palavraChave.ocorrencias.enfileira(linha);
+            }
         }
     }
 

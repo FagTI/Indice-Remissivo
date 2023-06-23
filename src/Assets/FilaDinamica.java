@@ -88,7 +88,7 @@ public class FilaDinamica <T>
         return this.inicio.elemento;
     }
 
-    public boolean contem(Integer elemento) {
+    public boolean contem(int elemento) {
 
         Nodo cursor = this.inicio;
         for (int i = 0; i < this.nElementos; i++) {

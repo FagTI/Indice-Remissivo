@@ -1,5 +1,4 @@
 import Assets.HashColisaoExterior;
-import Assets.PalavraChave;
 
 import java.io.*;
 import java.util.Scanner;
@@ -49,7 +48,7 @@ public class Main {
                     String palavrasDaLinha = scannerDaLinha.next();
 
                     palavrasDaLinha = palavrasDaLinha.toLowerCase();
-                    palavrasDaLinha = palavrasDaLinha.replaceAll("[^-a-zA-Z0-9À-ÿ]","");
+                    palavrasDaLinha = palavrasDaLinha.replaceAll("[^-a-zA-ZÀ-ÿ]","");
                     palavrasDaLinha = palavrasDaLinha.replaceAll("à|á|â|ã|ä|å", "a");
                     palavrasDaLinha = palavrasDaLinha.replaceAll("è|é|ê|ë", "e");
                     palavrasDaLinha = palavrasDaLinha.replaceAll("ì|í|î|ï", "i");
@@ -59,10 +58,12 @@ public class Main {
                     palavrasDaLinha = palavrasDaLinha.replaceAll("þ", "p");
                     palavrasDaLinha = palavrasDaLinha.replaceAll("ñ", "n");
 
-
-                    if(Hash.busca(palavrasDaLinha)){
-                        Hash.colocarLinha(palavrasDaLinha, contadorDaLinha);
+                    if(palavrasDaLinha != "") {
+                        if(Hash.busca(palavrasDaLinha)){
+                            Hash.colocarLinha(palavrasDaLinha, contadorDaLinha);
+                        }
                     }
+
 
                 }
                 //System.out.println("Texto: " + linha);
@@ -78,6 +79,8 @@ public class Main {
             System.out.println("Arquivo não encontrado: " + e.getMessage());
         } catch (IOException e) {
             throw new RuntimeException(e);
+        } catch (StringIndexOutOfBoundsException e) {
+            System.out.println("Palavra errada: " + e.getLocalizedMessage());
         }
     }
 }
